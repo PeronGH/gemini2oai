@@ -7,6 +7,7 @@ import {
   verbs,
 } from "@pixel/funweb";
 import { handleChatCompletion } from "./api.ts";
+import { GoogleGenerativeAIFetchError } from "@google/generative-ai";
 
 const handler = routes(
   route(
@@ -16,6 +17,12 @@ const handler = routes(
     ),
   ),
   catchError((error) => {
+    if (error instanceof GoogleGenerativeAIFetchError) {
+      return Response.json(error.errorDetails, {
+        status: error.status,
+        statusText: error.statusText,
+      });
+    }
     console.error("[CAUGHT ERROR]", error);
     return internalServerError();
   }),
