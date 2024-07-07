@@ -5,7 +5,7 @@ import {
   route,
   routes,
   verbs,
-} from "jsr:@pixel/funweb";
+} from "@pixel/funweb";
 import { handleChatCompletion } from "./api.ts";
 
 const handler = routes(
@@ -15,9 +15,9 @@ const handler = routes(
       post(handleChatCompletion),
     ),
   ),
-  catchError((req) => {
-    console.error("[CAUGHT ERROR]", req.error);
-    return internalServerError(req);
+  catchError((error) => {
+    console.error("[CAUGHT ERROR]", error);
+    return internalServerError();
   }),
 );
 

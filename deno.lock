@@ -2,17 +2,40 @@
   "version": "3",
   "packages": {
     "specifiers": {
+      "jsr:@pixel/funweb": "jsr:@pixel/funweb@0.8.2",
       "jsr:@pixel/myoai@^0.1.1": "jsr:@pixel/myoai@0.1.1",
+      "jsr:@std/path@^0.223.0": "jsr:@std/path@0.223.0",
       "npm:@google/generative-ai@^0.14.1": "npm:@google/generative-ai@0.14.1",
       "npm:js-tiktoken@1.0.12": "npm:js-tiktoken@1.0.12",
       "npm:openai@^4.52.3": "npm:openai@4.52.3"
     },
     "jsr": {
+      "@pixel/funweb@0.8.2": {
+        "integrity": "34553627351d93f9d885779323e6e5c3ad22dfb42c15131eb70e3038e561de5f",
+        "dependencies": [
+          "jsr:@std/path@^0.223.0"
+        ]
+      },
+      "@pixel/funweb@0.9.0": {
+        "integrity": "2112734df3f080699eacfc13b926778829bf8079525871fab276ec38f4c0819c",
+        "dependencies": [
+          "jsr:@std/path@^0.223.0"
+        ]
+      },
+      "@pixel/funweb@0.9.1": {
+        "integrity": "18edc0b0aa48f7f3e1d77f697ce08d7fafe9334688b901779018ba920de59c2e",
+        "dependencies": [
+          "jsr:@std/path@^0.223.0"
+        ]
+      },
       "@pixel/myoai@0.1.1": {
         "integrity": "aea31ee42422db66cfd9aba840aea32f25d7a5f1e4afcfe40fc3696b557f7082",
         "dependencies": [
           "npm:js-tiktoken@1.0.12"
         ]
+      },
+      "@std/path@0.223.0": {
+        "integrity": "593963402d7e6597f5a6e620931661053572c982fc014000459edc1f93cc3989"
       }
     },
     "npm": {
@@ -171,7 +194,7 @@
   "remote": {},
   "workspace": {
     "dependencies": [
-      "jsr:@pixel/funweb@^0.8.2",
+      "jsr:@pixel/funweb@^0.9.1",
       "jsr:@pixel/myoai@^0.1.1",
       "npm:@google/generative-ai@^0.14.1",
       "npm:openai@^4.52.3"

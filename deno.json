@@ -1,7 +1,7 @@
 {
   "imports": {
     "@google/generative-ai": "npm:@google/generative-ai@^0.14.1",
-    "@pixel/funweb": "jsr:@pixel/funweb@^0.8.2",
+    "@pixel/funweb": "jsr:@pixel/funweb@^0.9.1",
     "@pixel/myoai": "jsr:@pixel/myoai@^0.1.1",
     "openai": "npm:openai@^4.52.3"
   }
