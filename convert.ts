@@ -40,12 +40,19 @@ export function convertOaiReqToGemini(
     ],
   };
 
-  oaiReq.messages.forEach((message, i) => {
+  oaiReq.messages.forEach((message) => {
     switch (message.role) {
       case "system":
-        if (i === 0) {
+        // The first system message is the system instruction
+        if (!request.systemInstruction) {
           request.systemInstruction = message.content;
+          break;
         }
+        // Subsequent system messages become user messages
+        request.contents.push({
+          parts: [{ text: message.content }],
+          role: "user",
+        });
         break;
       case "user":
         if (typeof message.content === "string") {
