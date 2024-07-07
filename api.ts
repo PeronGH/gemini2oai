@@ -1,7 +1,11 @@
 import type { OpenAI } from "openai";
 import { unauthorized } from "./utils.ts";
 import { GoogleGenerativeAI } from "@google/generative-ai";
-import { convertOaiReqToGemini, extractTextFromStream } from "./convert.ts";
+import {
+  convertOaiReqToGemini,
+  extractTextFromStream,
+  mapModel,
+} from "./convert.ts";
 import { chatCompletion, chatCompletionStreamResponse } from "@pixel/myoai";
 
 export async function handleChatCompletion(req: Request): Promise<Response> {
@@ -15,7 +19,7 @@ export async function handleChatCompletion(req: Request): Promise<Response> {
   const oaiReq: OpenAI.ChatCompletionCreateParams = await req.json();
   const geminiReq = convertOaiReqToGemini(oaiReq);
 
-  const model = "gemini-1.5-flash"; // TODO: get from oaiReq.model
+  const model = mapModel(oaiReq.model);
 
   // Send request to Gemini
   const gemini = new GoogleGenerativeAI(apiKey)

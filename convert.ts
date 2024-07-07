@@ -86,3 +86,18 @@ export async function* extractTextFromStream(
     yield chunk.text();
   }
 }
+
+export function mapModel(model: string): string {
+  // Do not map gemini models
+  if (model.startsWith("gemini-")) {
+    return model;
+  }
+
+  // Map GPT-4o to Gemini 1.5 Pro
+  if (model.startsWith("gpt-4o")) {
+    return "gemini-1.5-pro";
+  }
+
+  // Otherwise, map to Gemini 1.5 Flash
+  return "gemini-1.5-flash";
+}
