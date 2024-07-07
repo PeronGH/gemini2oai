@@ -1,0 +1,5 @@
+{
+  "imports": {
+    "@pixel/funweb": "jsr:@pixel/funweb@^0.8.2"
+  }
+}
