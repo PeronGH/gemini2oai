@@ -3,6 +3,7 @@
   "packages": {
     "specifiers": {
       "jsr:@pixel/funweb": "jsr:@pixel/funweb@0.8.2",
+      "jsr:@pixel/funweb@^0.9.1": "jsr:@pixel/funweb@0.9.1",
       "jsr:@pixel/myoai@^0.1.1": "jsr:@pixel/myoai@0.1.1",
       "jsr:@std/path@^0.223.0": "jsr:@std/path@0.223.0",
       "npm:@google/generative-ai@^0.14.1": "npm:@google/generative-ai@0.14.1",

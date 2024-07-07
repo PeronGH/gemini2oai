@@ -18,7 +18,7 @@ const handler = routes(
   ),
   catchError((error) => {
     if (error instanceof GoogleGenerativeAIFetchError) {
-      return Response.json(error.errorDetails, {
+      return new Response(error.message, {
         status: error.status,
         statusText: error.statusText,
       });
