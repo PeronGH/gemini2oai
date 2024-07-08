@@ -92,11 +92,17 @@ export async function convertOaiReqToGemini(
           break;
         }
 
-        // TODO: handle tool use
-
-        break;
+      /* falls through */
+      // TODO: handle tool use
+      case "function":
       case "tool":
-        break;
+        throw new Response("Tool use is unsupported.", {
+          status: 400,
+        });
+      default:
+        throw new Response("Invalid message role.", {
+          status: 400,
+        });
     }
   }
 
