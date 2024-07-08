@@ -12,14 +12,11 @@ export async function urlToInlineData(
     throw new Error(`Failed to fetch image URL: ${response.statusText}`);
   }
 
-  // Extract the MIME type from the response headers
-  const mimeType = response.headers.get("Content-Type");
-  if (!mimeType) {
-    throw new Error("Failed to determine MIME type from the image URL");
-  }
-
   // Read the response as a blob
   const blob = await response.blob();
+
+  // Extract the MIME type from the response headers
+  const mimeType = response.headers.get("Content-Type") ?? blob.type;
 
   // Convert the blob to a base64 string
   const base64Data = await blobToBase64(blob);
