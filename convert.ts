@@ -4,10 +4,11 @@ import type {
 } from "@google/generative-ai";
 import { HarmBlockThreshold, HarmCategory } from "@google/generative-ai";
 import type { OpenAI } from "openai";
+import { urlToInlineData } from "./utils.ts";
 
-export function convertOaiReqToGemini(
+export async function convertOaiReqToGemini(
   oaiReq: OpenAI.ChatCompletionCreateParams,
-): GenerateContentRequest {
+): Promise<GenerateContentRequest> {
   const request: GenerateContentRequest = {
     contents: [],
     generationConfig: {
@@ -40,7 +41,7 @@ export function convertOaiReqToGemini(
     ],
   };
 
-  oaiReq.messages.forEach((message) => {
+  for (const message of oaiReq.messages) {
     switch (message.role) {
       case "system":
         // The first system message is the system instruction
@@ -63,7 +64,23 @@ export function convertOaiReqToGemini(
           break;
         }
 
-        // TODO: handle image input
+        // Handle image input
+        request.contents.push({
+          parts: await Promise.all(
+            message.content.map(async (message) => {
+              switch (message.type) {
+                case "text":
+                  return { text: message.text };
+                case "image_url":
+                  return {
+                    // TODO: load images in parallel
+                    inlineData: await urlToInlineData(message.image_url.url),
+                  };
+              }
+            }),
+          ),
+          role: "user",
+        });
 
         break;
       case "assistant":
@@ -81,7 +98,7 @@ export function convertOaiReqToGemini(
       case "tool":
         break;
     }
-  });
+  }
 
   return request;
 }

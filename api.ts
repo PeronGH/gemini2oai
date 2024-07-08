@@ -17,7 +17,7 @@ export async function handleChatCompletion(req: Request): Promise<Response> {
   // Extract API key and request
   const apiKey = authorization.slice("Bearer ".length);
   const oaiReq: OpenAI.ChatCompletionCreateParams = await req.json();
-  const geminiReq = convertOaiReqToGemini(oaiReq);
+  const geminiReq = await convertOaiReqToGemini(oaiReq);
 
   const model = mapModel(oaiReq.model);
 
